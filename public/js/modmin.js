@@ -250,6 +250,9 @@ define('forum/modmin/category', [
         let modal = showCategoryModal('[[modmin:add_category]]', 'addCategory', html, function (err, data) {
           if (err) return app.alertError(err.message)
           app.alertSuccess('[[modmin:category_added]]'+ (!!data.disabled ? ' [[modmin:awaiting_approval]]' : ''))
+          if (!!data.disabled) {
+            alert('[[modmin:category_added]]'+ (!!data.disabled ? ' [[modmin:awaiting_approval]]' : ''))
+          }
           ajaxify.refresh()
         })
 
