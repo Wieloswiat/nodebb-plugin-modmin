@@ -27,6 +27,6 @@
   "nbbpm": {
     "compatibility": "^1.14.0"
   },
-  "main": "library.js"
+  "main": "library.js",
   "license": "MIT"
 }
