@@ -25,7 +25,7 @@
     "admin"
   ],
   "nbbpm": {
-    "compatibility": "^1.14.0"
+    "compatibility": "^1.16.0"
   },
   "main": "library.js",
   "license": "MIT"
