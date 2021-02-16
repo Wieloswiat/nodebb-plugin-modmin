@@ -76,7 +76,7 @@ exports.load = function ({ app, middleware, router }, next) {
 							isAdmin = _isAdmin;
 							if (isAdmin) return next(null, cids);
 
-							Helpers.isUserAllowedTo("modmin", uid, cids, (err, isAllowed) => {
+							Helpers.isAllowedTo("modmin", uid, cids, (err, isAllowed) => {
 								if (err) return next(err);
 
 								cids = cids.filter((key, index) => isAllowed[index]);
@@ -248,7 +248,7 @@ exports.load = function ({ app, middleware, router }, next) {
 	async function uploadCategoryPicture(req, res, next) {
 		try {
 			const params = JSON.parse(req.body.params);
-			const isUserAllowedTo = await Helpers.isUserAllowedTo("modmin", req.uid, [
+			const isUserAllowedTo = await Helpers.isAllowedTo("modmin", req.uid, [
 				params.cid,
 			]);
 			if (isUserAllowedTo) {
@@ -1084,7 +1084,7 @@ function isAdminOrModmin(cid, uid, callback) {
 				User.isAdministrator(uid, next);
 			},
 			isModmin(next) {
-				Helpers.isUserAllowedTo("modmin", uid, [cid], (err, isAllowed) =>
+				Helpers.isAllowedTo("modmin", uid, [cid], (err, isAllowed) =>
 					next(err, isAllowed ? isAllowed[0] : false)
 				);
 			},
@@ -1102,7 +1102,7 @@ function isAdminOrGroupAssigner(cid, uid, callback) {
 				User.isAdministrator(uid, next);
 			},
 			isGroupAssigner(next) {
-				Helpers.isUserAllowedTo("assigngroups", uid, [cid], (err, isAllowed) =>
+				Helpers.isAllowedTo("assigngroups", uid, [cid], (err, isAllowed) =>
 					next(err, isAllowed ? isAllowed[0] : false)
 				);
 			},
@@ -1119,7 +1119,7 @@ function isAdminOrCanDelete(cid, uid, callback) {
 				User.isAdministrator(uid, next);
 			},
 			canDelete(next) {
-				Helpers.isUserAllowedTo(
+				Helpers.isAllowedTo(
 					"deletecategories",
 					uid,
 					[cid],
