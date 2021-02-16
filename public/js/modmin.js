@@ -15,10 +15,10 @@ define('forum/modmin/category', [
   Modmin.init = function () {
     cid = ajaxify.data.cid || 0
 
-    categorySelector.init($('[component="category-selector"]'), function (category) {
-      let cid = parseInt(category.cid, 10)
+    categorySelector.init($('[component="category-selector"]'), {onSelect: (category) => {
+      const cid = parseInt(category.cid, 10);
       ajaxify.go('modmin/category/' + (cid || ''))
-    })
+    }})
     Modmin.setupPrivilegeTable()
     if ($(location).attr('hash')=="#addCategory" && cid==0) {
       Modmin.addCategory();
